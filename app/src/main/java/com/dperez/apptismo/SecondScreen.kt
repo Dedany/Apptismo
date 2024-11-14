@@ -1,5 +1,6 @@
 package com.dperez.apptismo
 
+import AppDatabase
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -20,8 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
+
 @Composable
-fun SecondScreen(navController: NavHostController) {
+fun SecondScreen(navController: NavHostController, database: AppDatabase) {
     Box(
         modifier = Modifier.fillMaxSize(), // La caja ocupa todo el tamaño de la pantalla
         contentAlignment = Alignment.Center
@@ -31,7 +33,7 @@ fun SecondScreen(navController: NavHostController) {
             painter = painterResource(id = R.drawable.fondo), // Asegúrate de poner la imagen en la carpeta res/drawable
             contentDescription = "Fondo",
             modifier = Modifier.fillMaxSize(), // La imagen ocupa toda la pantalla
-                    contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop
         )
 
         Column(
@@ -95,8 +97,4 @@ fun SecondScreen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SecondScreenPreview() {
-    SecondScreen(navController = rememberNavController())
-}
+
