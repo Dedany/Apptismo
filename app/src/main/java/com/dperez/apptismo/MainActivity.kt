@@ -1,40 +1,45 @@
 package com.dperez.apptismo
 
-import AppDatabase
 import QuestionsFirstScreen
 import QuestionsTutor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.composableLambda
+import androidx.compose.runtime.remember
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
+import com.dperez.apptismo.data.AppDatabase
 import com.dperez.apptismo.ui.theme.ApptismoTheme
+import com.dperez.apptismo.viewmodels.MainViewModel
+import com.dperez.apptismo.viewmodels.MainViewModelFactory
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
+
+    // Se crea el ViewModel y se pasa la base de datos al crear el ViewModel
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory(AppDatabase.getDatabase(this))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Crear la instancia de AppDatabase
-        val database = AppDatabase(this)
-
         setContent {
             ApptismoTheme {
-                MyApp(database)
+                // Se pasa el ViewModel al Composable MyApp
+                MyApp(mainViewModel = mainViewModel)
             }
         }
     }
 }
 
-
 @Composable
-fun MyApp(database: AppDatabase) {
+fun MyApp(mainViewModel: MainViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -43,7 +48,7 @@ fun MyApp(database: AppDatabase) {
     ) {
         composable("MainScreen") {
             MainScreen(
-                database = database,  // Pasar database a MainScreen
+                mainViewModel = mainViewModel,  // Pasar el ViewModel a MainScreen
                 onNavigateToNextScreen = {
                     navController.navigate("SecondScreen")
                 }
@@ -52,31 +57,30 @@ fun MyApp(database: AppDatabase) {
         composable("SecondScreen") {
             SecondScreen(
                 navController = navController,
-                database = database  // Pasar database a SecondScreen
+                mainViewModel = mainViewModel  // Pasar el ViewModel a SecondScreen
             )
         }
         composable("autismScreen") {
             AutismScreen(
                 navController = navController,
-                database = database  // Pasar database a AutismScreen
+                mainViewModel = mainViewModel  // Pasar el ViewModel a AutismScreen
             )
         }
         composable("QuestionScreen") {
             QuestionScreen(
                 navController = navController,
-                database = database  // Pasar database a QuestionScreen
+                mainViewModel = mainViewModel  // Pasar el ViewModel a QuestionScreen
             )
         }
         composable("tutorScreen") {
             TutorScreen(
                 navController = navController,
-                database = database  // Pasar database a TutorScreen
+                mainViewModel = mainViewModel  // Pasar el ViewModel a TutorScreen
             )
         }
         composable("QuestionsFirstScreen") {
             QuestionsFirstScreen(
-                navController = navController,
-                // database = database  // Pasar database a QuestionsFirstScreen
+                navController = navController
             )
         }
         composable("QuestionsTutor") {

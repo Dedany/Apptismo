@@ -1,6 +1,6 @@
 package com.dperez.apptismo
 
-import AppDatabase
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -20,10 +20,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.dperez.apptismo.data.AppDatabase
+import com.dperez.apptismo.viewmodels.MainViewModel
 
 
 @Composable
-fun SecondScreen(navController: NavHostController, database: AppDatabase) {
+fun SecondScreen(mainViewModel: MainViewModel, navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize(), // La caja ocupa todo el tamaño de la pantalla
         contentAlignment = Alignment.Center

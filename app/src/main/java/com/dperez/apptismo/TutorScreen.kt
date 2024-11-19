@@ -1,6 +1,5 @@
 package com.dperez.apptismo
 
-import AppDatabase
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,13 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
+import com.dperez.apptismo.viewmodels.MainViewModel
 
 @Composable
-fun TutorScreen(navController: NavController, database: AppDatabase) {
-    // Obtener el contexto
+fun TutorScreen(navController: NavController, mainViewModel: MainViewModel) {
     val context = LocalContext.current
-    val userName by database.userNameFlow.collectAsState("Usuario")
+
+    // Obtener el nombre desde el ViewModel
+    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier
@@ -44,7 +44,7 @@ fun TutorScreen(navController: NavController, database: AppDatabase) {
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp)) // Espacio entre el botón y el cuadro de información
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Cuadro de información
         Box(
@@ -52,7 +52,7 @@ fun TutorScreen(navController: NavController, database: AppDatabase) {
                 .fillMaxWidth()
                 .padding(16.dp)
                 .border(width = 2.dp, color = Color.Gray)
-                .background(color = Color(0xFFE3F2FD)) // Fondo color azul claro
+                .background(color = Color(0xFFE3F2FD))
                 .padding(16.dp)
         ) {
             Text(
@@ -66,9 +66,9 @@ fun TutorScreen(navController: NavController, database: AppDatabase) {
             )
         }
 
-        Spacer(modifier = Modifier.height(20.dp)) // Espacio entre los elementos
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Texto "estado de" centrado
+        // Mostrar el nombre del usuario
         Text(
             text = "Cómo se encuentra $userName",
             fontSize = 22.sp,
@@ -77,9 +77,9 @@ fun TutorScreen(navController: NavController, database: AppDatabase) {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.height(20.dp)) // Espacio adicional
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Texto "Preguntas" con función de clic
+        // Botón de preguntas
         Text(
             text = "Preguntas",
             fontSize = 32.sp,
@@ -87,7 +87,7 @@ fun TutorScreen(navController: NavController, database: AppDatabase) {
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .clickable {
-              navController.navigate("QuestionsTutor")
+                    navController.navigate("QuestionsTutor")
                 }
                 .align(Alignment.CenterHorizontally)
         )

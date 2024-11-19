@@ -1,6 +1,6 @@
 package com.dperez.apptismo
 
-import AppDatabase
+
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,15 +22,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.dperez.apptismo.viewmodels.MainViewModel
 
 
 @Composable
 fun AutismScreen(
     navController: NavController,
-    database: AppDatabase
+    mainViewModel: MainViewModel
 ) {
     val context = LocalContext.current
-    val userName by database.userNameFlow.collectAsState("Usuario")
+    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier

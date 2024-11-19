@@ -1,15 +1,11 @@
 package com.dperez.apptismo
 
-import AppDatabase
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,20 +15,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
+import com.dperez.apptismo.viewmodels.MainViewModel
 
 @Composable
 fun QuestionScreen(
     navController: NavController,
-    database: AppDatabase // Añadir la instancia de AppDatabase
+    mainViewModel: MainViewModel // Usamos el ViewModel para acceder a la base de datos
 ) {
     val context = LocalContext.current
-    val userName = remember { mutableStateOf("") }
 
-    // Cargar el nombre del usuario desde la base de datos
-    LaunchedEffect(Unit) {
-        userName.value = database.getName() ?: "Usuario"
-    }
+    // Suscribirse al flujo de usuario
+    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier
@@ -43,11 +36,16 @@ fun QuestionScreen(
     ) {
         // Título de la pantalla con el nombre del usuario
         Text(
-            text = "Cómo estás, ${userName.value}",
+            text = "Cómo estás, $userName",
             modifier = Modifier.padding(bottom = 20.dp),
             color = Color.Black,
             fontSize = 24.sp
         )
+
+
+    }
+
+
 
         // Primera fila de caras (3 imágenes)
         Row(
@@ -146,7 +144,7 @@ fun QuestionScreen(
             color = Color.Blue,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable {
-                Toast.makeText(context, "tengo unas preguntas para ti", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Tengo unas preguntas para ti", Toast.LENGTH_SHORT).show()
             }
         )
         Text(
@@ -156,9 +154,9 @@ fun QuestionScreen(
                 .padding(top = 16.dp)
                 .clickable {
                     Toast
-                        .makeText(context, "tengo unas preguntas para ti", Toast.LENGTH_SHORT)
+                        .makeText(context, "Tengo unas preguntas para ti", Toast.LENGTH_SHORT)
                         .show()
                 }
         )
     }
-}
+
