@@ -1,12 +1,14 @@
 package com.dperez.apptismo
 
 
+import NameViewModel
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -21,17 +23,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.dperez.apptismo.viewmodels.MainViewModel
 
+import com.dperez.apptismo.data.AppDatabase
+import com.dperez.apptismo.viewmodels.EmotionViewModel
+import MainViewModel
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 
 @Composable
 fun AutismScreen(
     navController: NavController,
-    mainViewModel: MainViewModel
+    nameViewModel: NameViewModel, // Usamos NameViewModel para obtener el nombre
+    emotionViewModel: EmotionViewModel // Usamos EmotionViewModel para manejar emociones
 ) {
     val context = LocalContext.current
-    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
+
+    // Obtener el nombre desde NameViewModel
+    val userName by nameViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier
@@ -43,7 +52,7 @@ fun AutismScreen(
         // Botón de retroceso
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Volver",
                 tint = Color.Black
             )
@@ -71,21 +80,33 @@ fun AutismScreen(
                 contentDescription = "Cara Alegre",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "¡Te sientes feliz!", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Feliz"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "¡Te sientes feliz!", Toast.LENGTH_SHORT).show()
+                    }
             )
             Image(
                 painter = painterResource(id = R.drawable.neutral),
                 contentDescription = "Cara Neutral",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "Te sientes neutral.", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Neutral"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "Te sientes neutral.", Toast.LENGTH_SHORT).show()
+                    }
             )
             Image(
                 painter = painterResource(id = R.drawable.triste),
                 contentDescription = "Cara Triste",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "Te sientes triste.", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Triste"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "Te sientes triste.", Toast.LENGTH_SHORT).show()
+                    }
             )
         }
 
@@ -103,21 +124,33 @@ fun AutismScreen(
                 contentDescription = "Cara Aburrido",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "Te sientes aburrido.", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Aburrido"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "Te sientes aburrido.", Toast.LENGTH_SHORT).show()
+                    }
             )
             Image(
                 painter = painterResource(id = R.drawable.enfado),
                 contentDescription = "Cara Enfado",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "Te sientes enfadado.", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Enfado"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "Te sientes enfadado.", Toast.LENGTH_SHORT).show()
+                    }
             )
             Image(
                 painter = painterResource(id = R.drawable.llanto),
                 contentDescription = "Cara Llanto",
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable { Toast.makeText(context, "Tienes ganas de llorar.", Toast.LENGTH_SHORT).show() }
+                    .clickable {
+                        val emotion = "Llanto"
+                        emotionViewModel.insertEmotion(emotion)
+                        Toast.makeText(context, "Tienes ganas de llorar.", Toast.LENGTH_SHORT).show()
+                    }
             )
         }
 
@@ -130,16 +163,41 @@ fun AutismScreen(
             color = Color.Blue,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable {
-               navController.navigate("QuestionsFirstScreen")
+                navController.navigate("QuestionsFirstScreen")
             }
         )
 
+
+        // Texto de ayuda con ícono
         Text(
             text = "❔",
             fontSize = 48.sp,
-            modifier = Modifier.padding(top = 16.dp).clickable {
-              navController.navigate("QuestionsFirstScreen")
-            }
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .clickable {
+                    navController.navigate("QuestionsFirstScreen")
+                }
         )
     }
 }
+
+@Composable
+fun EmotionImage(
+    resourceId: Int,
+    description: String,
+    emotion: String,
+    emotionViewModel: EmotionViewModel,
+    context: android.content.Context
+) {
+    Image(
+        painter = painterResource(id = resourceId),
+        contentDescription = description,
+        modifier = Modifier
+            .size(100.dp)
+            .clickable {
+                emotionViewModel.insertEmotion(emotion)
+                Toast.makeText(context, "¡Te sientes $emotion!", Toast.LENGTH_SHORT).show()
+            }
+    )
+}
+

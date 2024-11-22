@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.dperez.apptismo.data.AppDatabase
-import com.dperez.apptismo.viewmodels.MainViewModel
+import MainViewModel
 
 
 @Composable

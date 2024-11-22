@@ -1,5 +1,6 @@
 package com.dperez.apptismo
 
+import MainViewModel
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.dperez.apptismo.viewmodels.MainViewModel
+
 
 @Composable
 fun QuestionScreen(
@@ -25,7 +26,7 @@ fun QuestionScreen(
     val context = LocalContext.current
 
     // Suscribirse al flujo de usuario
-    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
+    val userName by mainViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier

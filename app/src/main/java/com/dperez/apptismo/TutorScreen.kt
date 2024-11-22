@@ -21,14 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.dperez.apptismo.viewmodels.MainViewModel
+import MainViewModel
 
 @Composable
 fun TutorScreen(navController: NavController, mainViewModel: MainViewModel) {
     val context = LocalContext.current
 
     // Obtener el nombre desde el ViewModel
-    val userName by mainViewModel.userNameFlow.collectAsState("Usuario")
+    val userName by mainViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier
@@ -68,13 +68,17 @@ fun TutorScreen(navController: NavController, mainViewModel: MainViewModel) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Mostrar el nombre del usuario
+        // Mostrar el nombre del usuario con clic para navegar a EmotionScreen
         Text(
             text = "Cómo se encuentra $userName",
             fontSize = 22.sp,
             color = Color.Blue,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier
+                .clickable {
+                    navController.navigate("EmotionScreen") // Navega a EmotionScreen
+                }
+                .align(Alignment.CenterHorizontally)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -92,4 +96,5 @@ fun TutorScreen(navController: NavController, mainViewModel: MainViewModel) {
                 .align(Alignment.CenterHorizontally)
         )
     }
+
 }
