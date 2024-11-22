@@ -1,11 +1,6 @@
 package com.dperez.apptismo
 
-import  EmotionScreen
-import MainViewModel
 
-
-import QuestionsFirstScreen
-import QuestionsTutor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,14 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dperez.apptismo.ViewModels.MainViewModel
+import com.dperez.apptismo.ViewModels.ViewModelFactory.EmotionViewModelFactory
 import com.dperez.apptismo.ui.theme.ApptismoTheme
 
 import com.dperez.apptismo.viewmodels.EmotionViewModel
 import com.dperez.apptismo.ViewModels.ViewModelFactory.MainViewModelFactory
-import NameViewModel
+
 import com.dperez.apptismo.ViewModels.ViewModelFactory.NameViewModelFactory
 import com.dperez.apptismo.data.AppDatabase
-import com.dperez.apptismo.ViewModels.ViewModelFactory.EmotionViewModelFactory
+
+import com.dperez.apptismo.viewmodels.NameViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -88,7 +86,7 @@ fun MyApp(
         composable("autismScreen") {
             AutismScreen(
                 navController = navController,
-                nameViewModel = nameViewModel, // Pasar NameViewModel correctamente
+                mainViewModel = mainViewModel, // Pasar NameViewModel correctamente
                 emotionViewModel = emotionViewModel // Pasar EmotionViewModel correctamente
             )
         }
@@ -100,8 +98,8 @@ fun MyApp(
         }
         composable("TutorScreen") {
             TutorScreen(
-                navController = navController,mainViewModel = mainViewModel
-                 // Pasar EmotionViewModel si es necesario
+                navController = navController, mainViewModel = mainViewModel
+                // Pasar EmotionViewModel si es necesario
             )
         }
         composable("QuestionsFirstScreen") {
@@ -116,7 +114,8 @@ fun MyApp(
         }
         composable("EmotionScreen") {
             EmotionScreen(
-                emotionViewModel = emotionViewModel,mainViewModel = mainViewModel // Pasa el ViewModel a EmotionScreen
+                emotionViewModel = emotionViewModel,
+                mainViewModel = mainViewModel // Pasa el ViewModel a EmotionScreen
             )
         }
     }

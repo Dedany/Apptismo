@@ -1,3 +1,5 @@
+package com.dperez.apptismo.viewmodels
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dperez.apptismo.data.AppDatabase

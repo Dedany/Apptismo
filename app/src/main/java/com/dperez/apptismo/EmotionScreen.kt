@@ -1,3 +1,5 @@
+package com.dperez.apptismo
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -7,12 +9,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dperez.apptismo.ViewModels.MainViewModel
 import com.dperez.apptismo.viewmodels.EmotionViewModel
-import MainViewModel
+
 
 
 @Composable
-fun EmotionScreen(mainViewModel: MainViewModel,emotionViewModel: EmotionViewModel) {
+fun EmotionScreen(mainViewModel: MainViewModel, emotionViewModel: EmotionViewModel) {
     // Obtener el flujo de emociones desde el ViewModel
     val emotion by mainViewModel.emotionFlow.collectAsState(initial = "Emoción inicial")
 

@@ -1,9 +1,10 @@
 package com.dperez.apptismo.ViewModels.ViewModelFactory
 
-import NameViewModel
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dperez.apptismo.data.AppDatabase
+import com.dperez.apptismo.viewmodels.NameViewModel
 
 class NameViewModelFactory(private val database: AppDatabase) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

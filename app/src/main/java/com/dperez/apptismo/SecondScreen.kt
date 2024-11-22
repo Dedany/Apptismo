@@ -20,8 +20,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.dperez.apptismo.ViewModels.MainViewModel
 import com.dperez.apptismo.data.AppDatabase
-import MainViewModel
+
 
 
 @Composable

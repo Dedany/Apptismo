@@ -1,7 +1,7 @@
 package com.dperez.apptismo
 
 
-import NameViewModel
+
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -28,19 +28,20 @@ import androidx.navigation.NavController
 
 import com.dperez.apptismo.data.AppDatabase
 import com.dperez.apptismo.viewmodels.EmotionViewModel
-import MainViewModel
+
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import com.dperez.apptismo.ViewModels.MainViewModel
 
 @Composable
 fun AutismScreen(
     navController: NavController,
-    nameViewModel: NameViewModel, // Usamos NameViewModel para obtener el nombre
+    mainViewModel: MainViewModel, // Usamos NameViewModel para obtener el nombre
     emotionViewModel: EmotionViewModel // Usamos EmotionViewModel para manejar emociones
 ) {
     val context = LocalContext.current
 
     // Obtener el nombre desde NameViewModel
-    val userName by nameViewModel.nameFlow.collectAsState("Usuario")
+    val userName by mainViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier
