@@ -51,7 +51,7 @@ class MainViewModel(private val database: AppDatabase) : ViewModel() {
     }
 
     // Función para cargar la emoción desde la base de datos
-    private fun loadEmotion() {
+     fun loadEmotion() {
         viewModelScope.launch {
             try {
                 val emotion = database.emotionDao().getEmotion(id = 1) // Asume que buscas la emoción con id=1

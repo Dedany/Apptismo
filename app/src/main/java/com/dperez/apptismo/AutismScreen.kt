@@ -32,6 +32,7 @@ import com.dperez.apptismo.viewmodels.EmotionViewModel
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import com.dperez.apptismo.ViewModels.MainViewModel
 
+
 @Composable
 fun AutismScreen(
     navController: NavController,
@@ -40,7 +41,7 @@ fun AutismScreen(
 ) {
     val context = LocalContext.current
 
-    // Obtener el nombre desde NameViewModel
+    // Obtener el nombre desde mainViewModel
     val userName by mainViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
@@ -76,17 +77,7 @@ fun AutismScreen(
                 .padding(bottom = 30.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.feliz),
-                contentDescription = "Cara Alegre",
-                modifier = Modifier
-                    .size(100.dp)
-                    .clickable {
-                        val emotion = "Feliz"
-                        emotionViewModel.insertEmotion(emotion)
-                        Toast.makeText(context, "¡Te sientes feliz!", Toast.LENGTH_SHORT).show()
-                    }
-            )
+
             Image(
                 painter = painterResource(id = R.drawable.neutral),
                 contentDescription = "Cara Neutral",
@@ -94,7 +85,7 @@ fun AutismScreen(
                     .size(100.dp)
                     .clickable {
                         val emotion = "Neutral"
-                        emotionViewModel.insertEmotion(emotion)
+                        mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Te sientes neutral.", Toast.LENGTH_SHORT).show()
                     }
             )
@@ -105,8 +96,19 @@ fun AutismScreen(
                     .size(100.dp)
                     .clickable {
                         val emotion = "Triste"
-                        emotionViewModel.insertEmotion(emotion)
+                        mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Te sientes triste.", Toast.LENGTH_SHORT).show()
+                    }
+            )
+            Image(
+                painter = painterResource(id = R.drawable.feliz),
+                contentDescription = "Cara Alegre",
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable{
+                        val emotion = "Feliz"
+                        mainViewModel.insertOrUpdateEmotion(emotion)
+                        Toast.makeText(context, "¡Te sientes feliz!", Toast.LENGTH_SHORT).show()
                     }
             )
         }
@@ -127,7 +129,7 @@ fun AutismScreen(
                     .size(100.dp)
                     .clickable {
                         val emotion = "Aburrido"
-                        emotionViewModel.insertEmotion(emotion)
+                        mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Te sientes aburrido.", Toast.LENGTH_SHORT).show()
                     }
             )
@@ -138,7 +140,7 @@ fun AutismScreen(
                     .size(100.dp)
                     .clickable {
                         val emotion = "Enfado"
-                        emotionViewModel.insertEmotion(emotion)
+                        mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Te sientes enfadado.", Toast.LENGTH_SHORT).show()
                     }
             )
@@ -149,7 +151,7 @@ fun AutismScreen(
                     .size(100.dp)
                     .clickable {
                         val emotion = "Llanto"
-                        emotionViewModel.insertEmotion(emotion)
+                        mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Tienes ganas de llorar.", Toast.LENGTH_SHORT).show()
                     }
             )

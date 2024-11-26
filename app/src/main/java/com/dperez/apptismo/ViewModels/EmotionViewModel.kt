@@ -12,8 +12,9 @@ class EmotionViewModel(private val database: AppDatabase) : ViewModel() {
     fun insertEmotion(emotion: String) {
         viewModelScope.launch {
             try {
-                val newEmotion = Emotion(id = 0, emotion = emotion) // id = 0 permite que Room genere un ID automáticamente
+                val newEmotion = Emotion(id = 1, emotion = emotion) // id = 0 permite que Room genere un ID automáticamente
                 database.emotionDao().insertOrUpdateEmotion(newEmotion)
+               
             } catch (e: Exception) {
                 // Manejo de errores
                 e.printStackTrace()

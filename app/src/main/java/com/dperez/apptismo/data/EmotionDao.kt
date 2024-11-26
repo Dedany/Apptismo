@@ -12,5 +12,5 @@ interface EmotionDao {
     suspend fun getEmotion(id: Int): String?// Obtener todas las emociones
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdateEmotion(emotion: Emotion): Long // Insertar o actualizar emoción
+    suspend fun insertOrUpdateEmotion(emotion: Emotion)// Insertar o actualizar emoción
 }
