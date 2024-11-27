@@ -139,7 +139,7 @@ fun AutismScreen(
                 modifier = Modifier
                     .size(100.dp)
                     .clickable {
-                        val emotion = "Enfado"
+                        val emotion = "Enfadado"
                         mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Te sientes enfadado.", Toast.LENGTH_SHORT).show()
                     }
@@ -150,7 +150,7 @@ fun AutismScreen(
                 modifier = Modifier
                     .size(100.dp)
                     .clickable {
-                        val emotion = "Llanto"
+                        val emotion = "con ganas de llorar"
                         mainViewModel.insertOrUpdateEmotion(emotion)
                         Toast.makeText(context, "Tienes ganas de llorar.", Toast.LENGTH_SHORT).show()
                     }

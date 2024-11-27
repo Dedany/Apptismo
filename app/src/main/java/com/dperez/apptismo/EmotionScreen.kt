@@ -44,7 +44,7 @@ fun EmotionScreen(
 
         // Mostrar la emoción actual
         Text(
-            text = "Hoy estás: $emotion",
+            text = "Hoy está: $emotion",
             fontSize = 24.sp,
             color = Color.Black,
             fontWeight = FontWeight.Bold

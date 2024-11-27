@@ -4,16 +4,28 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.dperez.apptismo.ViewModels.MainViewModel
+import com.dperez.apptismo.ViewModels.QuestionsViewModel
 
 @Composable
-fun QuestionsTutor(navController: NavController) {
+fun QuestionsTutor(navController: NavController,questionsViewModel: QuestionsViewModel) {
+
+    val context = LocalContext.current
+
+    // Obtener la pregunta desde mainViewModel
+    val TheQuestions by questionsViewModel.questionsFlow.collectAsState("Pregunta inicial")
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,6 +47,11 @@ fun QuestionsTutor(navController: NavController) {
             navController.popBackStack() // Esta línea hace que vuelvas a la pantalla anterior
         }) {
             Text(text = "Volver")
+        }
+        Button(onClick = {
+            questionsViewModel.insertOrUpdateQuestions("¿Cómo te sientes hoy?")
+        }) {
+            Text(text = "Guardar Pregunta")
         }
     }
 }

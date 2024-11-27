@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dperez.apptismo.data.AppDatabase
 import com.dperez.apptismo.data.Emotion
 import com.dperez.apptismo.data.Name
+import com.dperez.apptismo.data.Questions
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,10 +20,15 @@ class MainViewModel(private val database: AppDatabase) : ViewModel() {
     private val _emotionFlow = MutableStateFlow("Emoción inicial") // Estado inicial
     val emotionFlow: StateFlow<String> get() = _emotionFlow
 
+    //Estado para manejar las preguntas
+    private val _questionsFlow = MutableStateFlow("Pregunta inicial") // Estado inicial
+    val questionsFlow: StateFlow<String> get() = _questionsFlow
+
     init {
         // Cargar los datos iniciales cuando se inicializa el ViewModel
         loadName()
         loadEmotion()
+
     }
 
     // Función para cargar el nombre desde la base de datos
@@ -74,4 +80,6 @@ class MainViewModel(private val database: AppDatabase) : ViewModel() {
             }
         }
     }
+
+
 }

@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Emotion::class,Name::class], version = 1, exportSchema = true)
+@Database(entities = [Emotion::class,Name::class,Questions::class], version = 3, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun emotionDao(): EmotionDao
     abstract fun nameDao(): NameDao
+    abstract fun questionsDao(): QuestionsDao
 
     companion object {
         @Volatile

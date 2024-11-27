@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dperez.apptismo.ViewModels.MainViewModel
+import com.dperez.apptismo.ViewModels.QuestionsViewModel
 import com.dperez.apptismo.ViewModels.ViewModelFactory.EmotionViewModelFactory
 import com.dperez.apptismo.ui.theme.ApptismoTheme
 
@@ -18,6 +19,7 @@ import com.dperez.apptismo.viewmodels.EmotionViewModel
 import com.dperez.apptismo.ViewModels.ViewModelFactory.MainViewModelFactory
 
 import com.dperez.apptismo.ViewModels.ViewModelFactory.NameViewModelFactory
+import com.dperez.apptismo.ViewModels.ViewModelFactory.QuestionsViewModelFactory
 import com.dperez.apptismo.data.AppDatabase
 
 import com.dperez.apptismo.viewmodels.NameViewModel
@@ -41,6 +43,10 @@ class MainActivity : ComponentActivity() {
         NameViewModelFactory(AppDatabase.getDatabase(this))
     }
 
+    private val questionsViewModel: QuestionsViewModel by viewModels {
+        QuestionsViewModelFactory(AppDatabase.getDatabase(this))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,7 +56,8 @@ class MainActivity : ComponentActivity() {
                 MyApp(
                     mainViewModel = mainViewModel,
                     emotionViewModel = emotionViewModel,
-                    nameViewModel = nameViewModel
+                    nameViewModel = nameViewModel,
+                    questionsViewModel = questionsViewModel
                 )
             }
         }
@@ -61,7 +68,8 @@ class MainActivity : ComponentActivity() {
 fun MyApp(
     mainViewModel: MainViewModel,
     emotionViewModel: EmotionViewModel,
-    nameViewModel: NameViewModel
+    nameViewModel: NameViewModel,
+    questionsViewModel: QuestionsViewModel
 ) {
     val navController = rememberNavController()
 
@@ -109,7 +117,8 @@ fun MyApp(
         }
         composable("QuestionsTutor") {
             QuestionsTutor(
-                navController = navController
+                navController = navController,
+                questionsViewModel = questionsViewModel
             )
         }
         composable("EmotionScreen") {
