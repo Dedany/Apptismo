@@ -8,9 +8,11 @@ import androidx.room.Query
 
 @Dao
 interface QuestionsDao {
-    @Query("SELECT questions FROM Questions WHERE id = :id")
-    suspend fun getQuestions(id: Int): String?// Obtener todas las emociones
+    // Obtener todas las preguntas de la base de datos
+    @Query("SELECT * FROM Questions")
+    suspend fun getQuestions(): List<Questions>
 
+    // Insertar o actualizar una pregunta (se usa para insertar nuevas preguntas)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdateQuestions(emotion: Questions)// Insertar o actualizar emoción
+    suspend fun insertOrUpdateQuestions(question: Questions)
 }

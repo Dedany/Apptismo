@@ -1,6 +1,7 @@
 package com.dperez.apptismo
 
 
+import QuestionsViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dperez.apptismo.ViewModels.MainViewModel
-import com.dperez.apptismo.ViewModels.QuestionsViewModel
+
 import com.dperez.apptismo.ViewModels.ViewModelFactory.EmotionViewModelFactory
 import com.dperez.apptismo.ui.theme.ApptismoTheme
 
@@ -112,7 +113,8 @@ fun MyApp(
         }
         composable("QuestionsFirstScreen") {
             QuestionsFirstScreen(
-                navController = navController
+                navController = navController,
+                questionsViewModel = questionsViewModel
             )
         }
         composable("QuestionsTutor") {

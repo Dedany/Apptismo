@@ -1,42 +1,43 @@
-package com.dperez.apptismo.ViewModels
-
-
-
-
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dperez.apptismo.data.AppDatabase
 import com.dperez.apptismo.data.Questions
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class QuestionsViewModel (private val database: AppDatabase) : ViewModel() {
+class QuestionsViewModel(private val database: AppDatabase) : ViewModel() {
+    // Flujo para manejar todas las preguntas
+    private val _allQuestionsFlow = MutableStateFlow<List<Questions>>(emptyList())
+    val allQuestionsFlow: StateFlow<List<Questions>> get() = _allQuestionsFlow
 
-    private val _questionsFlow = MutableStateFlow("Pregunta inicial") // Estado inicial
-    val questionsFlow: StateFlow<String> get() = _questionsFlow
+    init {
+        loadAllQuestions()
+    }
 
-
-
-    fun insertOrUpdateQuestions(questionText: String) {
+    // Cargar todas las preguntas desde la base de datos
+    private fun loadAllQuestions() {
         viewModelScope.launch {
             try {
-                val questionsEntity = Questions(id = 1, questions = questionText)
-                database.questionsDao().insertOrUpdateQuestions(questionsEntity)
-                _questionsFlow.value = questionText // Actualizar el flujo
+                val questions = database.questionsDao().getQuestions()
+                _allQuestionsFlow.update { questions }
             } catch (e: Exception) {
-                e.printStackTrace() // Manejo de errores
+                e.printStackTrace()
             }
         }
     }
-    fun loadQuestions() {
+
+    // Insertar una nueva pregunta en la base de datos
+    fun insertQuestion(questionText: String) {
         viewModelScope.launch {
             try {
-                val questions = database.questionsDao().getQuestions(id = 1) // Asume que buscas la emoción con id=1
-                _questionsFlow.value = questions ?: "pregunta predeterminada"
+                val newQuestion = Questions(questions = questionText)
+                database.questionsDao().insertOrUpdateQuestions(newQuestion)
+                // Recargar todas las preguntas después de la inserción
+                loadAllQuestions()
             } catch (e: Exception) {
-                _questionsFlow.value = "Error al cargar pregunta" // Manejo de errores
+                e.printStackTrace()
             }
         }
     }
