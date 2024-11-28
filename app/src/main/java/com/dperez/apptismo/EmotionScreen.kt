@@ -13,16 +13,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.dperez.apptismo.ViewModels.MainViewModel
-
-
+import com.dperez.apptismo.viewmodels.EmotionViewModel
 
 
 @Composable
 fun EmotionScreen(
-    mainViewModel: MainViewModel,
+    emotionViewModel: EmotionViewModel,
     navController: NavController // Pasamos NavController para navegar
 ) {
-    val emotion by mainViewModel.emotionFlow.collectAsState(initial = "Emoción inicial")
+    val emotion by emotionViewModel.emotionFlow.collectAsState(initial = "Emoción inicial")
 
     Column(
         modifier = Modifier

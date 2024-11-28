@@ -16,18 +16,13 @@ class MainViewModel(private val database: AppDatabase) : ViewModel() {
     private val _nameFlow = MutableStateFlow("Usuario") // Estado inicial
     val nameFlow: StateFlow<String> get() = _nameFlow
 
-    // Estado para manejar la emoción
-    private val _emotionFlow = MutableStateFlow("Emoción inicial") // Estado inicial
-    val emotionFlow: StateFlow<String> get() = _emotionFlow
 
     //Estado para manejar las preguntas
-    private val _questionsFlow = MutableStateFlow("Pregunta inicial") // Estado inicial
-    val questionsFlow: StateFlow<String> get() = _questionsFlow
 
     init {
         // Cargar los datos iniciales cuando se inicializa el ViewModel
         loadName()
-        loadEmotion()
+
 
     }
 
@@ -56,30 +51,8 @@ class MainViewModel(private val database: AppDatabase) : ViewModel() {
         }
     }
 
-    // Función para cargar la emoción desde la base de datos
-     fun loadEmotion() {
-        viewModelScope.launch {
-            try {
-                val emotion = database.emotionDao().getEmotion(id = 1) // Asume que buscas la emoción con id=1
-                _emotionFlow.value = emotion ?: "Emoción predeterminada"
-            } catch (e: Exception) {
-                _emotionFlow.value = "Error al cargar emoción" // Manejo de errores
-            }
-        }
-    }
 
-    // Función para insertar o actualizar la emoción
-    fun insertOrUpdateEmotion(emotion: String) {
-        viewModelScope.launch {
-            try {
-                val emotionEntity = Emotion(id = 1, emotion = emotion)
-                database.emotionDao().insertOrUpdateEmotion(emotionEntity)
-                _emotionFlow.value = emotion // Actualizar el flujo
-            } catch (e: Exception) {
-                e.printStackTrace() // Manejo de errores
-            }
-        }
     }
 
 
-}
+

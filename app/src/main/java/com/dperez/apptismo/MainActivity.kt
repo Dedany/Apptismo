@@ -125,7 +125,7 @@ fun MyApp(
         }
         composable("EmotionScreen") {
             EmotionScreen(
-                mainViewModel = mainViewModel,
+                emotionViewModel = emotionViewModel,
                 navController = navController
             )
         }
