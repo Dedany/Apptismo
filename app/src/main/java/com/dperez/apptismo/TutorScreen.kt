@@ -21,15 +21,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.dperez.apptismo.ViewModels.MainViewModel
+
+import com.dperez.apptismo.viewmodels.NameViewModel
 
 
 @Composable
-fun TutorScreen(navController: NavController, mainViewModel: MainViewModel) {
+fun TutorScreen(navController: NavController, nameViewModel: NameViewModel) {
     val context = LocalContext.current
 
     // Obtener el nombre desde el ViewModel
-    val userName by mainViewModel.nameFlow.collectAsState("Usuario")
+    val userName by nameViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier

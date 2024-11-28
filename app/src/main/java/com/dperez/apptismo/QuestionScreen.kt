@@ -16,18 +16,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.dperez.apptismo.ViewModels.MainViewModel
+
+import com.dperez.apptismo.viewmodels.NameViewModel
 
 
 @Composable
 fun QuestionScreen(
     navController: NavController,
-    mainViewModel: MainViewModel // Usamos el ViewModel para acceder a la base de datos
+
+    nameViewModel: NameViewModel // Usamos el ViewModel para acceder a la base de datos
 ) {
     val context = LocalContext.current
 
     // Suscribirse al flujo de usuario
-    val userName by mainViewModel.nameFlow.collectAsState("Usuario")
+    val userName by nameViewModel.nameFlow.collectAsState("Usuario")
 
     Column(
         modifier = Modifier

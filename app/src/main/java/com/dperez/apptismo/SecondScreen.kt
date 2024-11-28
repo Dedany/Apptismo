@@ -26,7 +26,7 @@ import com.dperez.apptismo.data.AppDatabase
 
 
 @Composable
-fun SecondScreen(mainViewModel: MainViewModel, navController: NavHostController) {
+fun SecondScreen( navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize(), // La caja ocupa todo el tamaño de la pantalla
         contentAlignment = Alignment.Center

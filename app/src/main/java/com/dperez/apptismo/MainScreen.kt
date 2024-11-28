@@ -10,13 +10,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dperez.apptismo.ViewModels.MainViewModel
+import com.dperez.apptismo.viewmodels.NameViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel,
+  nameViewModel: NameViewModel,
     onNavigateToNextScreen: () -> Unit
 ) {
     var name by remember { mutableStateOf("") }
@@ -42,7 +42,7 @@ fun MainScreen(
             Button(onClick = {
                 if (name.isNotBlank()) {
                     // Llamar al ViewModel para insertar el nombre
-                    mainViewModel.insertOrUpdateName(name)
+                    nameViewModel.insertOrUpdateName(name)
                     onNavigateToNextScreen()
                 }
             }) {

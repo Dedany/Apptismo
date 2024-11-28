@@ -55,7 +55,6 @@ class MainActivity : ComponentActivity() {
             ApptismoTheme {
                 // Pasar los ViewModels al Composable MyApp
                 MyApp(
-                    mainViewModel = mainViewModel,
                     emotionViewModel = emotionViewModel,
                     nameViewModel = nameViewModel,
                     questionsViewModel = questionsViewModel
@@ -67,7 +66,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp(
-    mainViewModel: MainViewModel,
+
     emotionViewModel: EmotionViewModel,
     nameViewModel: NameViewModel,
     questionsViewModel: QuestionsViewModel
@@ -80,7 +79,7 @@ fun MyApp(
     ) {
         composable("MainScreen") {
             MainScreen(
-                mainViewModel = mainViewModel,
+                nameViewModel = nameViewModel,
                 onNavigateToNextScreen = {
                     navController.navigate("SecondScreen")
                 }
@@ -89,25 +88,25 @@ fun MyApp(
         composable("SecondScreen") {
             SecondScreen(
                 navController = navController,
-                mainViewModel = mainViewModel
+
             )
         }
         composable("autismScreen") {
             AutismScreen(
                 navController = navController,
-                mainViewModel = mainViewModel, // Pasar NameViewModel correctamente
+                nameViewModel =   nameViewModel, // Pasar NameViewModel correctamente
                 emotionViewModel = emotionViewModel // Pasar EmotionViewModel correctamente
             )
         }
         composable("QuestionScreen") {
             QuestionScreen(
                 navController = navController,
-                mainViewModel = mainViewModel
+               nameViewModel = nameViewModel
             )
         }
         composable("TutorScreen") {
             TutorScreen(
-                navController = navController, mainViewModel = mainViewModel
+                navController = navController, nameViewModel = nameViewModel
                 // Pasar EmotionViewModel si es necesario
             )
         }

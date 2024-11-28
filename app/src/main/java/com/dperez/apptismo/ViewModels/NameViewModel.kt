@@ -16,6 +16,7 @@ class NameViewModel(private val database: AppDatabase) : ViewModel() {
 
     init {
         loadName()
+
     }
 
     private fun loadName() {
