@@ -30,7 +30,6 @@ import com.dperez.apptismo.data.AppDatabase
 import com.dperez.apptismo.viewmodels.EmotionViewModel
 
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import com.dperez.apptismo.ViewModels.MainViewModel
 import com.dperez.apptismo.viewmodels.NameViewModel
 
 

@@ -14,6 +14,7 @@ class QuestionsViewModel(private val database: AppDatabase) : ViewModel() {
 
     init {
         loadAllQuestions()
+
     }
 
     // Cargar todas las preguntas desde la base de datos
@@ -36,6 +37,17 @@ class QuestionsViewModel(private val database: AppDatabase) : ViewModel() {
                 database.questionsDao().insertOrUpdateQuestions(newQuestion)
                 // Recargar todas las preguntas después de la inserción
                 loadAllQuestions()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+    // Actualizar una respuesta
+    fun updateAnswer(id: Int, answer: String) {
+        viewModelScope.launch {
+            try {
+                database.questionsDao().updateResponse(id, answer)
+                loadAllQuestions() // Recargar después de actualizar
             } catch (e: Exception) {
                 e.printStackTrace()
             }

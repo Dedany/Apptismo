@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Questions")
 data class Questions(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val questions: String
+    val questions: String,
+    val response: String? = null
 )

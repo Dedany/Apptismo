@@ -24,6 +24,7 @@ class NameViewModel(private val database: AppDatabase) : ViewModel() {
             try {
                 val name = database.nameDao().getName(id = 1) // Asume un único usuario con id=1
                 _nameFlow.value = name?.name ?: "Usuario"
+                println("Nombre cargado: ${_nameFlow.value}")
             } catch (e: Exception) {
                 _nameFlow.value = "Usuario" // Manejo de errores
             }

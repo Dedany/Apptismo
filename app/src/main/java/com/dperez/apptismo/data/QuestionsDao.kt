@@ -15,4 +15,7 @@ interface QuestionsDao {
     // Insertar o actualizar una pregunta (se usa para insertar nuevas preguntas)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdateQuestions(question: Questions)
+
+    @Query("UPDATE Questions SET response = :response WHERE id = :id")
+    suspend fun updateResponse(id: Int, response: String)
 }
