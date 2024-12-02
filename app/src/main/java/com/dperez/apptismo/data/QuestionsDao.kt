@@ -18,4 +18,8 @@ interface QuestionsDao {
 
     @Query("UPDATE Questions SET response = :response WHERE id = :id")
     suspend fun updateResponse(id: Int, response: String)
+
+    @Query("DELETE FROM Questions")
+    suspend fun deleteAllQuestions()
+
 }

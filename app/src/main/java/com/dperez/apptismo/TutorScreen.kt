@@ -68,13 +68,13 @@ fun TutorScreen(navController: NavController, nameViewModel: NameViewModel) {
             )
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         // Mostrar el nombre del usuario con clic para navegar a EmotionScreen
         Text(
-            text = "Cómo se encuentra $userName",
-            fontSize = 22.sp,
-            color = Color.Blue,
+            text = "Cómo se encuentra $userName?",
+            fontSize = 30.sp,
+            color = Color.Black,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .clickable {
@@ -83,7 +83,7 @@ fun TutorScreen(navController: NavController, nameViewModel: NameViewModel) {
                 .align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(80.dp))
 
         // Botón de preguntas
         Text(

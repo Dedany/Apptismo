@@ -83,11 +83,21 @@ fun QuestionsTutor(navController: NavController, questionsViewModel: QuestionsVi
                 }
             }
         }
+        Button(onClick = { navController.popBackStack() }) {
+            Text(text = "Volver")
+        }
+        // Botón para borrar todas las preguntas
+        Button(onClick = {
+            questionsViewModel.deleteAllQuestions() // Llama al método para borrar
+        }) {
+            Text(text = "Borrar Todas las Preguntas")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { navController.popBackStack() }) {
             Text(text = "Volver")
         }
+
     }
 }

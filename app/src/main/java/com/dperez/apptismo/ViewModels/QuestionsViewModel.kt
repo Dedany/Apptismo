@@ -53,4 +53,16 @@ class QuestionsViewModel(private val database: AppDatabase) : ViewModel() {
             }
         }
     }
+
+    fun deleteAllQuestions() {
+        viewModelScope.launch {
+            try {
+                database.questionsDao().deleteAllQuestions() // Llama al DAO
+                loadAllQuestions() // Recarga la lista de preguntas
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
 }
