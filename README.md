@@ -23,15 +23,6 @@
 
 ---
 
-## 📸 Capturas
-
-| Pantalla principal | Detalle de tarea | Lista de tareas |
-|--------------------|------------------|-----------------|
-| ![Home](screenshots/home.png) | ![Detail](screenshots/detail.png) | ![TaskList](screenshots/tasklist.png) |
-
-*(Coloca tus capturas en la carpeta `/screenshots` del proyecto)*  
-
----
 
 ## 🛠 Tecnologías usadas
 
