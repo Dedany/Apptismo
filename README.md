@@ -31,7 +31,6 @@
 - **Persistencia:** Room  
 - **Inyección de dependencias:** Hilt  
 - **Asincronía:** Coroutines + Flow  
-- **Testing:** Turbine, Mockito  
 
 ---
 
